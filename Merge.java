@@ -1,24 +1,17 @@
-/*
-
-mergesort(data,lo,hi):
-  if lo >= hi :
-    return
-  mergesort left side
-  mergesort right side
-  merge */
+import java.util.*;
 
 
 public class Merge{
 
   public static void mergesort(int[]data){
-    int[] temp = new int[data.length];
+  /* int[] temp = new int[data.length];
     for (int i = 0; i < data.length; i++){
       temp[i] = data[i];
-    }
-    return mergesortH(data, temp, 0, data.length-1);
+    }*/
+    mergesortH(data, 0, data.length-1);
   }
 
-  public static void mergesortH(int[] data, int[] temp; int lo, int hi){
+  public static void mergesortH(int[] data, int lo, int hi){
     int half = (hi + lo) / 2;
     if (lo < hi){
       int[] left = new int [half-lo+1];
@@ -31,8 +24,42 @@ public class Merge{
       }
       mergesortH(left, 0, left.length-1);
       mergesortH(right, 0, right.length-1);
+      merge(data, left, right);
+    }
+    else{
+      System.out.println(Arrays.toString(data));
+      return;
     }
   }
+
+  public static void merge(int[] dest, int[] s1, int[] s2){
+    int l = 0;
+    int r = 0;
+    int x = 0;
+    while(l < s1.length && r < s2.length){
+      if (s1[l] < s2[r]){
+        dest[x] = s1[l];
+        l++;
+      }
+      else{
+        dest[x] = s2[r];
+        r++;
+      }
+      x++;
+    }
+    while(l < s1.length){
+      dest[x] = s1[l];
+      x++;
+      l++;
+    }
+    while(r < s2.length){
+      dest[x] = s2[r];
+      x++;
+      r++;
+    }
+  }
+
+
 
   private static void swap(int[] data, int x, int y){
     int hold = data[x];
@@ -40,13 +67,10 @@ public class Merge{
     data[y] = hold;
   }
 
-  public static String toString(int[] data){
-    String s = "[";
-    for (int i = 0; i < data.length; i++){
-      s = s + data[i] + ", ";
-    }
-    s += "]";
-    return s;
+  public static void main(String[] args){
+    int[] ary =  new int[] {4, 76, 3, 9 , 1, 2, 32, 5314, 754523, 123,76,35,2,65,235,453141,67325,3415,236};
+    System.out.println(Arrays.toString(ary));
+    mergesort(ary);
+    System.out.println(Arrays.toString(ary));
   }
-
 }
