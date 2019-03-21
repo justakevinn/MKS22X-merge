@@ -3,6 +3,19 @@ import java.util.*;
 
 public class Merge{
 
+  public static void insertionsort(int[] data, int lo, int hi){
+        for (int i = lo; i < hi+1; i ++) {
+            int k = data[i];
+            for (int x = i; x > lo && k < data[x-1]; x --) {
+                data[x] = data[x-1];
+            }
+            data[x] = k;
+        }
+
+    }
+
+
+
   public static void mergesort(int[]data){
   /* int[] temp = new int[data.length];
     for (int i = 0; i < data.length; i++){
